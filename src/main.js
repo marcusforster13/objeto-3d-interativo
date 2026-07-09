@@ -66,8 +66,10 @@ const MODEL_URL = './models/objeto.glb';
 /* ========================================================================= */
 
 const canvas = document.getElementById('canvas3d');
-const loadingScreen = document.getElementById('loading-screen');
-const loadingText = document.getElementById('loading-text');
+const introScreen = document.getElementById('intro-screen');
+const introProgressBar = document.getElementById('intro-progress-bar');
+const introStatus = document.getElementById('intro-status');
+const introStartBtn = document.getElementById('intro-start-btn');
 const hint = document.getElementById('hint');
 const tooltip = document.getElementById('tooltip');
 
@@ -224,12 +226,13 @@ loader.load(
   (progressEvent) => {
     if (progressEvent.total) {
       const pct = Math.round((progressEvent.loaded / progressEvent.total) * 100);
-      loadingText.textContent = `Carregando modelo... ${pct}%`;
+      introProgressBar.style.width = `${pct}%`;
+      introStatus.textContent = `Carregando... ${pct}%`;
     }
   },
   (error) => {
     console.error('Erro ao carregar o modelo:', error);
-    loadingText.textContent = 'Erro ao carregar o modelo. Veja o console.';
+    introStatus.textContent = 'Erro ao carregar o modelo. Veja o console.';
   }
 );
 
@@ -261,16 +264,22 @@ function fitCameraToObject(object) {
 }
 
 function hideLoadingScreen() {
-  loadingScreen.classList.add('hidden');
+  introProgressBar.style.width = '100%';
+  introStatus.textContent = 'Pronto!';
+  introStartBtn.classList.add('visible');
+}
+
+introStartBtn.addEventListener('click', () => {
+  introScreen.classList.add('hidden');
   setTimeout(() => {
-    loadingScreen.style.display = 'none';
-  }, 500);
+    introScreen.style.display = 'none';
+  }, 600);
 
   // Esconde a dica de "arraste para girar" depois de um tempo
   setTimeout(() => {
     hint.style.opacity = '0';
   }, 4000);
-}
+});
 
 /* ========================================================================= */
 /* Interação: toque/clique para acionar animações                           */

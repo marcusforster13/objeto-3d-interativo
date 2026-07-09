@@ -10,10 +10,14 @@
     <div id="app">
       <canvas id="canvas3d"></canvas>
 
-      <div id="loading-screen">
-        <div class="loading-box">
-          <div class="spinner"></div>
-          <p id="loading-text">Carregando modelo... 0%</p>
+      <div id="intro-screen">
+        <div class="intro-box">
+          <img src="./logo.png" alt="Logo" class="intro-logo" />
+          <div class="intro-progress">
+            <div id="intro-progress-bar" class="intro-progress-bar"></div>
+          </div>
+          <p id="intro-status">Carregando...</p>
+          <button id="intro-start-btn" class="intro-start-btn">Toque para começar</button>
         </div>
       </div>
 

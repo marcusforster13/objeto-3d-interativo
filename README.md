@@ -5,6 +5,9 @@ Site com o seu modelo 3D: gira com o dedo/mouse, e ao tocar em peças específic
 
 ## O que já está pronto
 
+- **Tela de intro** com a logo (`public/logo.png`), barra de progresso de carregamento e botão
+  "Toque para começar" — o usuário só entra na cena 3D depois de tocar, o que também garante
+  que o navegador reconheça uma interação real do usuário (bom pra telas touch/TVs).
 - Modelo carregado de `public/models/objeto.glb`
 - Rotação por touch/mouse (`OrbitControls`) — um dedo gira, dois dedos dá zoom/pan
 - Toque nas peças abaixo aciona a animação certa:
@@ -77,6 +80,11 @@ NovaPeca_Mesh: {
 
 Depois, troca o arquivo `public/models/objeto.glb` pela versão nova exportada
 do Blender (mesmo nome de arquivo) e roda `npm run dev` de novo pra testar.
+
+## Trocar a logo da tela de intro
+
+É só substituir o arquivo `public/logo.png` por outra imagem (mesmo nome de arquivo,
+ou troca o caminho no `<img src="...">` dentro de `index.html`).
 
 ## Estrutura do projeto
 

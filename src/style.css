@@ -26,46 +26,87 @@ html, body {
   touch-action: none;
 }
 
-/* Loading */
-#loading-screen {
+/* Intro / Splash */
+#intro-screen {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0e0f12;
+  background: #0a0b0e;
+  background-image: radial-gradient(circle at 50% 40%, #16181f 0%, #0a0b0e 70%);
   z-index: 20;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s ease;
 }
 
-#loading-screen.hidden {
+#intro-screen.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-.loading-box {
-  text-align: center;
-  color: #e8e8e8;
+.intro-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 20px;
+  animation: introFadeIn 0.9s ease both;
 }
 
-.spinner {
-  width: 40px;
-  height: 40px;
-  margin: 0 auto 16px;
-  border: 3px solid rgba(255,255,255,0.15);
-  border-top-color: #4d9eff;
-  border-radius: 50%;
-  animation: spin 0.9s linear infinite;
+@keyframes introFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+.intro-logo {
+  width: min(280px, 60vw);
+  height: auto;
+  filter: drop-shadow(0 0 24px rgba(0, 210, 224, 0.25));
 }
 
-#loading-text {
+.intro-progress {
+  width: min(220px, 50vw);
+  height: 3px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.intro-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00c2d1, #4d9eff);
+  border-radius: 3px;
+  transition: width 0.2s ease;
+}
+
+#intro-status {
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: #8a8f9c;
+  min-height: 16px;
+}
+
+.intro-start-btn {
+  display: none;
+  border: 1px solid rgba(0, 194, 209, 0.5);
+  background: rgba(0, 194, 209, 0.08);
+  color: #e8fbff;
   font-size: 14px;
-  letter-spacing: 0.02em;
-  color: #a8adb8;
+  letter-spacing: 0.03em;
+  padding: 12px 32px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.intro-start-btn:active {
+  transform: scale(0.96);
+}
+
+.intro-start-btn.visible {
+  display: inline-block;
+  animation: introFadeIn 0.5s ease both;
 }
 
 /* Hint */
