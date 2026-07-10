@@ -109,6 +109,64 @@ html, body {
   animation: introFadeIn 0.5s ease both;
 }
 
+/* Painel de informação institucional (aparece ao tocar numa peça) */
+.info-panel {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 20px);
+  max-width: min(420px, 88vw);
+  width: 100%;
+  background: rgba(14, 16, 20, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 194, 209, 0.28);
+  border-radius: 16px;
+  padding: 16px 44px 16px 20px;
+  z-index: 12;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.info-panel.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
+.info-panel-title {
+  display: block;
+  color: #4ee2ef;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.info-panel-desc {
+  color: #e8e8ea;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.info-panel-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #8a8f9c;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.info-panel-close:active {
+  color: #fff;
+}
+
 /* Hint */
 .hint {
   position: absolute;

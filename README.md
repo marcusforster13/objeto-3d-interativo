@@ -86,6 +86,47 @@ do Blender (mesmo nome de arquivo) e roda `npm run dev` de novo pra testar.
 É só substituir o arquivo `public/logo.png` por outra imagem (mesmo nome de arquivo,
 ou troca o caminho no `<img src="...">` dentro de `index.html`).
 
+## Cenário
+
+O cenário (`public/models/cenario.glb`) é carregado junto com o objeto principal,
+na posição absoluta em que foi modelado no Blender — não precisa de ajuste manual
+de posição/escala, desde que ele tenha sido montado no mesmo arquivo Blender do
+objeto original.
+
+As peças do cenário com material **emissivo** (as "luzes") brilham automaticamente
+com efeito de **bloom** — isso é detectado sozinho pelo código, olhando os materiais
+do arquivo exportado. Se você adicionar mais luzes no Blender, só precisa marcar o
+material delas com uma cor emissiva (e, se quiser mais brilho, usar a opção
+"Emission Strength" no shader) — não precisa mexer no código do site.
+
+Pra ajustar a intensidade do brilho, abre `src/main.js` e procura por `UnrealBloomPass`:
+
+```js
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  1.1, // strength -> aumenta pra brilhar mais forte
+  0.5, // radius -> aumenta pra espalhar mais o brilho
+  0.15 // threshold -> diminui pra mais coisas brilharem, aumenta pra só o mais claro brilhar
+);
+```
+
+## Painel de informação institucional
+
+Ao tocar em qualquer peça, um painel aparece no rodapé da tela com um título e uma
+descrição curta (ex: "Painel Solar — Painéis responsáveis pela captação de energia solar...").
+Ele some sozinho depois de alguns segundos, ou pode ser fechado no X.
+
+Pra editar os textos, abre `src/main.js` e altera os campos `title` e `description`
+de cada peça dentro do objeto `INTERACTIONS`, no topo do arquivo:
+
+```js
+PortaBateria: {
+  ...
+  title: 'Bateria',
+  description: 'Seu texto institucional aqui.'
+}
+```
+
 ## Estrutura do projeto
 
 ```
